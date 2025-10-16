@@ -61,13 +61,33 @@ document.addEventListener('DOMContentLoaded', () => {
 
 function setupCanvas() {
     const dpr = window.devicePixelRatio || 1;
-    const rect = canvas.parentElement.getBoundingClientRect();
-    canvas.width = (rect.width - 32) * dpr;
-    canvas.height = (rect.height - 32) * dpr;
-    canvas.style.width = (rect.width - 32) + 'px';
-    canvas.style.height = (rect.height - 32) + 'px';
+    const container = canvas.parentElement;
+    const rect = container.getBoundingClientRect();
+    
+    // Calculate actual drawable area (subtract padding)
+    const padding = 32;
+    const canvasWidth = rect.width - padding;
+    const canvasHeight = rect.height - padding;
+    
+    // Set canvas size with device pixel ratio for sharp rendering
+    canvas.width = canvasWidth * dpr;
+    canvas.height = canvasHeight * dpr;
+    
+    // Set display size (CSS pixels)
+    canvas.style.width = canvasWidth + 'px';
+    canvas.style.height = canvasHeight + 'px';
+    
+    // Scale context to match device pixel ratio
     ctx.scale(dpr, dpr);
 }
+
+// Add resize handler for orientation changes
+window.addEventListener('resize', () => {
+    if (canvas && ctx && gameState.currentPattern) {
+        setupCanvas();
+        drawPattern(gameState.currentPattern);
+    }
+});
 
 // Navigation
 function goHome() {
