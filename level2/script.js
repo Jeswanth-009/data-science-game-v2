@@ -60,17 +60,25 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function setupCanvas() {
+    if (!canvas) return;
+    
     const dpr = window.devicePixelRatio || 1;
     const container = canvas.parentElement;
     
     // Force a reflow to get accurate dimensions
-    container.style.display = 'flex';
     const rect = container.getBoundingClientRect();
     
     // Calculate actual drawable area (subtract container padding)
     const containerPadding = 32; // 16px padding on each side
     const canvasWidth = Math.floor(rect.width - containerPadding);
     const canvasHeight = Math.floor(rect.height - containerPadding);
+    
+    // Ensure minimum dimensions
+    if (canvasWidth < 50 || canvasHeight < 50) {
+        console.warn('Canvas dimensions too small, retrying...');
+        setTimeout(setupCanvas, 100);
+        return;
+    }
     
     // Set actual canvas resolution with device pixel ratio
     canvas.width = canvasWidth * dpr;
@@ -80,7 +88,7 @@ function setupCanvas() {
     canvas.style.width = canvasWidth + 'px';
     canvas.style.height = canvasHeight + 'px';
     
-    // Get context and scale for retina displays
+    // Get fresh context and scale for retina displays
     ctx = canvas.getContext('2d');
     ctx.scale(dpr, dpr);
     
@@ -94,7 +102,9 @@ window.addEventListener('resize', () => {
     if (canvas && gameState.currentPattern) {
         setupCanvas();
         const dataPoints = generateData(gameState.currentPattern);
-        drawChart(dataPoints);
+        if (dataPoints && dataPoints.length > 0) {
+            drawChart(dataPoints);
+        }
     }
 });
 
@@ -215,6 +225,18 @@ function handleTimeout() {
 
 // Chart Generation
 function generateChart() {
+    // Ensure canvas is ready
+    if (!canvas || !ctx) {
+        console.error('Canvas not initialized');
+        canvas = document.getElementById('chart-canvas');
+        if (canvas) {
+            ctx = canvas.getContext('2d');
+            setupCanvas();
+        } else {
+            return;
+        }
+    }
+
     // Choose random pattern
     const patternKeys = Object.values(PATTERNS);
     const randomPattern = patternKeys[Math.floor(Math.random() * patternKeys.length)];
@@ -224,8 +246,12 @@ function generateChart() {
     // Generate data based on pattern
     const dataPoints = generateDataPoints(randomPattern);
 
-    // Draw chart
-    drawChart(dataPoints);
+    // Draw chart with a small delay to ensure canvas is ready
+    setTimeout(() => {
+        if (ctx && dataPoints && dataPoints.length > 0) {
+            drawChart(dataPoints);
+        }
+    }, 50);
 }
 
 function generateDataPoints(pattern) {
@@ -305,9 +331,20 @@ function generateDataPoints(pattern) {
 }
 
 function drawChart(dataPoints) {
+    if (!ctx || !canvas) {
+        console.error('Canvas context not available');
+        return;
+    }
+
     // Use logical dimensions stored during setup
     const width = canvas.logicalWidth || canvas.width / (window.devicePixelRatio || 1);
     const height = canvas.logicalHeight || canvas.height / (window.devicePixelRatio || 1);
+    
+    // Validate dimensions
+    if (width < 50 || height < 50) {
+        console.warn('Invalid canvas dimensions');
+        return;
+    }
     
     // Responsive padding based on canvas size
     const padding = Math.min(40, width * 0.1);
@@ -329,6 +366,12 @@ function drawChart(dataPoints) {
     ctx.lineTo(padding, height - padding);
     ctx.lineTo(width - padding, height - padding);
     ctx.stroke();
+
+    // Validate data points
+    if (!dataPoints || dataPoints.length === 0) {
+        console.error('No data points to draw');
+        return;
+    }
 
     // Draw data line
     ctx.strokeStyle = '#ff8c42';
