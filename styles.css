@@ -1,0 +1,400 @@
+/* ================================
+   DATA QUEST - MAIN MENU STYLES
+   ================================ */
+
+/* Import Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;900&display=swap');
+
+/* Reset and Base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    /* Color Palette */
+    --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    --level1-color: #4facfe;
+    --level2-color: #ff8c42;
+    --level3-color: #9b59b6;
+    --bg-light: #f7fafc;
+    --bg-white: #ffffff;
+    --text-dark: #2d3748;
+    --text-gray: #718096;
+    --text-light: #a0aec0;
+    --shadow-sm: 0 2px 8px rgba(0,0,0,0.08);
+    --shadow-md: 0 4px 16px rgba(0,0,0,0.12);
+    --shadow-lg: 0 8px 32px rgba(0,0,0,0.16);
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+    --radius-xl: 24px;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: var(--primary-gradient);
+    min-height: 100vh;
+    overflow-x: hidden;
+    color: var(--text-dark);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.main-container {
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto;
+    min-height: 100vh;
+    background: var(--bg-white);
+    box-shadow: var(--shadow-lg);
+}
+
+.main-content {
+    padding: 40px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+}
+
+/* ===== HEADER ===== */
+.main-header {
+    text-align: center;
+    animation: fadeInDown 0.6s ease;
+}
+
+.main-title {
+    font-size: 2.5rem;
+    font-weight: 900;
+    background: var(--primary-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+}
+
+.title-icon {
+    font-size: 2.2rem;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+}
+
+.main-tagline {
+    font-size: 0.95rem;
+    color: var(--text-gray);
+    font-weight: 400;
+}
+
+/* ===== LEVEL CARDS ===== */
+.levels-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.level-card {
+    background: var(--bg-white);
+    border-radius: var(--radius-lg);
+    padding: 24px;
+    box-shadow: var(--shadow-md);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    border: 2px solid transparent;
+    position: relative;
+    overflow: hidden;
+    animation: fadeInUp 0.6s ease backwards;
+}
+
+.level-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: var(--level1-color);
+    transition: height 0.3s ease;
+}
+
+.level-card.level-1::before { background: linear-gradient(90deg, #4facfe 0%, #00f2fe 100%); }
+.level-card.level-2::before { background: linear-gradient(90deg, #ff8c42 0%, #ffa726 100%); }
+.level-card.level-3::before { background: linear-gradient(90deg, #9b59b6 0%, #c39bd3 100%); }
+
+.level-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+}
+
+.level-card:active {
+    transform: translateY(-2px);
+}
+
+.level-number {
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: var(--text-light);
+    margin-bottom: 8px;
+}
+
+.level-icon {
+    font-size: 3rem;
+    margin-bottom: 12px;
+    filter: drop-shadow(0 2px 8px rgba(0,0,0,0.1));
+}
+
+.level-name {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 8px;
+}
+
+.level-description {
+    font-size: 0.9rem;
+    color: var(--text-gray);
+    line-height: 1.5;
+    margin-bottom: 16px;
+}
+
+.level-meta {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 16px;
+}
+
+.meta-item {
+    font-size: 0.85rem;
+    color: var(--text-gray);
+    font-weight: 500;
+}
+
+.level-score {
+    background: var(--bg-light);
+    padding: 12px;
+    border-radius: var(--radius-sm);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.score-label {
+    font-size: 0.85rem;
+    color: var(--text-gray);
+    font-weight: 500;
+}
+
+.score-value {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text-dark);
+}
+
+/* Play Button */
+.play-btn {
+    width: 100%;
+    background: var(--primary-gradient);
+    border: none;
+    padding: 14px 24px;
+    border-radius: var(--radius-md);
+    color: white;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.3s ease;
+    box-shadow: var(--shadow-sm);
+}
+
+.level-1 .play-btn {
+    background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+}
+
+.level-2 .play-btn {
+    background: linear-gradient(135deg, #ff8c42 0%, #ffa726 100%);
+}
+
+.level-3 .play-btn {
+    background: linear-gradient(135deg, #9b59b6 0%, #c39bd3 100%);
+}
+
+.play-btn:hover {
+    transform: translateX(4px);
+    box-shadow: var(--shadow-md);
+}
+
+.play-btn:active {
+    transform: translateX(2px);
+}
+
+.btn-arrow {
+    font-size: 1.2rem;
+    transition: transform 0.3s ease;
+}
+
+.play-btn:hover .btn-arrow {
+    transform: translateX(4px);
+}
+
+/* ===== PROGRESS SECTION ===== */
+.progress-section {
+    background: var(--bg-light);
+    padding: 24px;
+    border-radius: var(--radius-lg);
+    text-align: center;
+    animation: fadeInUp 0.8s ease backwards;
+}
+
+.progress-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin-bottom: 20px;
+}
+
+.progress-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.stat-item {
+    background: var(--bg-white);
+    padding: 16px;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+}
+
+.stat-value {
+    font-size: 1.8rem;
+    font-weight: 900;
+    background: var(--primary-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 4px;
+}
+
+.stat-label {
+    font-size: 0.75rem;
+    color: var(--text-gray);
+    font-weight: 500;
+}
+
+.reset-btn {
+    background: transparent;
+    border: 2px solid var(--text-light);
+    padding: 10px 20px;
+    border-radius: var(--radius-md);
+    color: var(--text-gray);
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.reset-btn:hover {
+    border-color: var(--text-gray);
+    background: var(--bg-white);
+    color: var(--text-dark);
+}
+
+/* ===== FOOTER ===== */
+.main-footer {
+    text-align: center;
+    padding: 24px 0;
+    color: var(--text-gray);
+    font-size: 0.85rem;
+    animation: fadeIn 1s ease backwards;
+}
+
+.main-footer p {
+    margin-bottom: 4px;
+}
+
+.footer-note {
+    font-weight: 600;
+    color: var(--text-light);
+}
+
+/* ===== ANIMATIONS ===== */
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Stagger animations for level cards */
+.level-card:nth-child(1) { animation-delay: 0.1s; }
+.level-card:nth-child(2) { animation-delay: 0.2s; }
+.level-card:nth-child(3) { animation-delay: 0.3s; }
+
+/* ===== RESPONSIVE DESIGN ===== */
+@media (max-width: 600px) {
+    .main-content {
+        padding: 24px 16px;
+        gap: 24px;
+    }
+
+    .main-title {
+        font-size: 2rem;
+    }
+
+    .title-icon {
+        font-size: 1.8rem;
+    }
+
+    .level-card {
+        padding: 20px;
+    }
+
+    .level-name {
+        font-size: 1.3rem;
+    }
+
+    .progress-stats {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .stat-value {
+        font-size: 1.5rem;
+    }
+}
+
+@media (min-width: 768px) {
+    .main-container {
+        margin: 20px auto;
+        min-height: calc(100vh - 40px);
+        border-radius: var(--radius-xl);
+    }
+}

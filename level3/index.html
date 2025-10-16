@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Quest: Bias Breakdown</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="game-container">
+        <!-- Start Screen -->
+        <div id="start-screen" class="screen active">
+            <div class="screen-content">
+                <div class="level-badge">LEVEL 3</div>
+                <div class="level-icon">⚖️</div>
+                <h1 class="game-title">Bias Breakdown</h1>
+                <p class="game-description">
+                    Navigate ethical dilemmas in AI. Every decision affects accuracy, bias, and public trust.
+                </p>
+                <div class="info-box">
+                    <p><strong>⚠️ Your Challenge:</strong></p>
+                    <p>You'll face <strong>7 challenging scenarios</strong> with <strong>30 seconds per decision</strong>. Each choice changes 3 metrics:</p>
+                    <ul>
+                        <li>🎯 <strong>Accuracy</strong> - How well the model performs</li>
+                        <li>⚖️ <strong>Bias</strong> - Fairness across groups</li>
+                        <li>❤️ <strong>Trust</strong> - Public confidence</li>
+                    </ul>
+                    <p>💡 <em>Timeouts hurt all metrics. Think fast, choose wisely!</em></p>
+                </div>
+                <button id="start-btn" class="main-btn">Start Making Decisions 🧠</button>
+                <button class="back-btn" onclick="goHome()">← Back to Menu</button>
+            </div>
+        </div>
+
+        <!-- Game Screen -->
+        <div id="game-screen" class="screen">
+            <div class="screen-content">
+                <div class="game-header">
+                                    <div class="event-counter">
+                    <span>Event</span>
+                    <span class="event-number"><span id="current-event">1</span>/7</span>
+                </div>
+                    
+                    <div class="metrics-display">
+                        <div class="metric-item">
+                            <span class="metric-icon">🎯</span>
+                            <div class="metric-info">
+                                <span class="metric-label">Accuracy</span>
+                                <span class="metric-value" id="accuracy-value">75</span>%
+                            </div>
+                        </div>
+                        <div class="metric-item">
+                            <span class="metric-icon">⚖️</span>
+                            <div class="metric-info">
+                                <span class="metric-label">Bias</span>
+                                <span class="metric-value" id="bias-value">50</span>%
+                            </div>
+                        </div>
+                        <div class="metric-item">
+                            <span class="metric-icon">❤️</span>
+                            <div class="metric-info">
+                                <span class="metric-label">Trust</span>
+                                <span class="metric-value" id="trust-value">70</span>%
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="trust-bar-container">
+                        <div class="trust-bar">
+                            <div class="trust-fill" id="trust-bar"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="scenario-container">
+                    <div class="scenario-icon" id="scenario-icon">🚨</div>
+                    <h2 class="scenario-title" id="scenario-title">Loading...</h2>
+                    <p class="scenario-description" id="scenario-description">...</p>
+                </div>
+
+                <div class="choices-container" id="choices-container">
+                    <!-- Choices will be dynamically inserted -->
+                </div>
+
+                <div id="feedback" class="feedback"></div>
+            </div>
+        </div>
+
+        <!-- Results Screen -->
+        <div id="results-screen" class="screen">
+            <div class="screen-content">
+                <div class="results-icon" id="results-icon">🎉</div>
+                <h2 class="results-title">Mission Complete!</h2>
+                
+                <div class="final-metrics">
+                    <div class="final-metric">
+                        <span class="final-metric-icon">🎯</span>
+                        <span class="final-metric-label">Accuracy</span>
+                        <span class="final-metric-value" id="final-accuracy">--</span>%
+                    </div>
+                    <div class="final-metric">
+                        <span class="final-metric-icon">⚖️</span>
+                        <span class="final-metric-label">Bias</span>
+                        <span class="final-metric-value" id="final-bias">--</span>%
+                    </div>
+                    <div class="final-metric">
+                        <span class="final-metric-icon">❤️</span>
+                        <span class="final-metric-label">Trust</span>
+                        <span class="final-metric-value" id="final-trust">--</span>%
+                    </div>
+                </div>
+
+                <div class="final-score-display">
+                    <div class="score-label">Overall Score</div>
+                    <div class="score-circle">
+                        <span id="final-score">0</span>
+                    </div>
+                </div>
+
+                <div class="result-message" id="result-message"></div>
+
+                <div class="insights-box">
+                    <h3>🧠 What You Learned:</h3>
+                    <ul>
+                        <li>✓ Ethical AI decision-making</li>
+                        <li>✓ Balancing accuracy vs. fairness</li>
+                        <li>✓ Managing stakeholder trust</li>
+                        <li>✓ Real-world bias mitigation</li>
+                    </ul>
+                </div>
+
+                <div class="results-actions">
+                    <button class="main-btn" onclick="playAgain()">Play Again 🔄</button>
+                    <button class="back-btn" onclick="goHome()">← Back to Menu</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

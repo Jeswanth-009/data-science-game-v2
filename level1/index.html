@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Quest: Model Mayhem</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="game-container">
+        <!-- Start Screen -->
+        <div id="start-screen" class="screen active">
+            <div class="screen-content">
+                <div class="personal-header">
+                    <h1 class="game-title">🤖 Data Quest<br><span class="subtitle">Model Mayhem</span></h1>
+                    <p class="creator-note">Built with ❤️ by a fellow data nerd</p>
+                </div>
+                
+                <div class="game-description">
+                    <p class="tagline">"Ever wondered what it's like to be a data scientist under pressure? Let's find out!"</p>
+                    <div class="challenge-box">
+                        <h3>⚡ Your Challenge</h3>
+                        <p>Build an ML model from scratch. Make tough choices. Handle real-world chaos. Can you ship before the deadline?</p>
+                    </div>
+                </div>
+                
+                <button id="start-btn" class="start-button">Let's Build Something Cool! 🚀</button>
+                <button class="back-button" onclick="window.location.href='../index.html'">← Back to Menu</button>
+                
+                <div class="game-info">
+                    <div class="info-item">
+                        <span class="info-icon">⏰</span>
+                        <span>~4-5 minutes</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-icon">🎯</span>
+                        <span>Learn by doing</span>
+                    </div>
+                    <div class="info-item">
+                        <span class="info-icon">📱</span>
+                        <span>Works on mobile</span>
+                    </div>
+                </div>
+                
+                <p class="disclaimer">No actual deadlines were harmed in the making of this game 😄</p>
+            </div>
+        </div>
+
+        <!-- Stage 1: Data Collection -->
+        <div id="stage1" class="screen">
+            <div class="screen-content">
+                <div class="stage-header">
+                    <h2>📊 Data Collection</h2>
+                    <div class="timer-bar">
+                        <div class="timer-fill" id="timer1"></div>
+                    </div>
+                    <p class="stage-description">Pick your data source wisely - quality over quantity sometimes!</p>
+                </div>
+
+                <div class="choices-container">
+                    <div class="choice-card data-option" data-source="gov">
+                        <div class="card-icon">📊</div>
+                        <h3>Gov Data</h3>
+                        <p>Clean & Limited</p>
+                        <div class="stats">
+                            <span class="stat-good">+12 Accuracy</span>
+                            <span class="stat-good">-8 Bias</span>
+                        </div>
+                    </div>
+
+                    <div class="choice-card data-option" data-source="web">
+                        <div class="card-icon">🌐</div>
+                        <h3>Web Scrape</h3>
+                        <p>Messy & Huge</p>
+                        <div class="stats">
+                            <span class="stat-good">+25 Accuracy</span>
+                            <span class="stat-bad">+12 Bias</span>
+                        </div>
+                    </div>
+
+                    <div class="choice-card data-option" data-source="user">
+                        <div class="card-icon">👥</div>
+                        <h3>User Data</h3>
+                        <p>Real & Biased</p>
+                        <div class="stats">
+                            <span class="stat-good">+18 Accuracy</span>
+                            <span class="stat-bad">+18 Bias</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Stage 2: Data Cleaning -->
+        <div id="stage2" class="screen">
+            <div class="screen-content">
+                <div class="stage-header">
+                    <h2>🧹 Data Cleaning</h2>
+                    <div class="timer-bar">
+                        <div class="timer-fill" id="timer2"></div>
+                    </div>
+                    <p class="stage-description">Tap 🦠 to remove noise! Avoid 💾 good data!</p>
+                    <div class="score-display">Score: <span id="cleaning-score">0</span></div>
+                </div>
+                
+                <div class="game-area" id="cleaning-area"></div>
+            </div>
+        </div>
+
+        <!-- Stage 3: Model Training -->
+        <div id="stage3" class="screen">
+            <div class="screen-content">
+                <div class="stage-header">
+                    <h2>🧠 Model Training</h2>
+                    <div class="timer-bar">
+                        <div class="timer-fill" id="timer3"></div>
+                    </div>
+                    <p class="stage-description">Choose your model, then hold TRAIN at the right time!</p>
+                </div>
+                
+                <div class="model-selection" id="model-selection">
+                    <div class="model-card" data-model="linear">
+                        <div class="model-icon">🔹</div>
+                        <div>
+                            <h3>Linear Regression</h3>
+                            <p>Fast & Safe</p>
+                        </div>
+                    </div>
+                    <div class="model-card" data-model="forest">
+                        <div class="model-icon">🌲</div>
+                        <div>
+                            <h3>Random Forest</h3>
+                            <p>Balanced</p>
+                        </div>
+                    </div>
+                    <div class="model-card" data-model="neural">
+                        <div class="model-icon">🧠</div>
+                        <div>
+                            <h3>Deep Net</h3>
+                            <p>Slow but Powerful</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="training-area" id="training-area" style="display: none;">
+                    <div class="training-progress">
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="training-progress"></div>
+                            <div class="sweet-spot"></div>
+                        </div>
+                        <p>Hold to train! Release in the green zone!</p>
+                    </div>
+                    <button id="train-btn" class="big-button">HOLD TO TRAIN 🚀</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Stage 4: Evaluation -->
+        <div id="stage4" class="screen">
+            <div class="screen-content">
+                <div class="stage-header">
+                    <h2>📈 Evaluation</h2>
+                    <div class="timer-bar">
+                        <div class="timer-fill" id="timer4"></div>
+                    </div>
+                    <p class="stage-description">Your model stats - what matters most?</p>
+                </div>
+                
+                <div class="metrics-display">
+                    <div class="metric">
+                        <span class="metric-label">Accuracy:</span>
+                        <span class="metric-value" id="accuracy-display">--</span>
+                    </div>
+                    <div class="metric">
+                        <span class="metric-label">Bias:</span>
+                        <span class="metric-value" id="bias-display">--</span>
+                    </div>
+                    <div class="metric">
+                        <span class="metric-label">F1 Score:</span>
+                        <span class="metric-value" id="f1-display">--</span>
+                    </div>
+                    <div class="metric">
+                        <span class="metric-label">Speed:</span>
+                        <span class="metric-value" id="speed-display">--</span>
+                    </div>
+                </div>
+                
+                <div class="optimization-choices">
+                    <h3>What matters most for your problem?</h3>
+                    <div class="choice-buttons">
+                        <button class="choice-btn" data-optimize="accuracy">⚙️ Accuracy</button>
+                        <button class="choice-btn" data-optimize="fairness">⚖️ Fairness</button>
+                        <button class="choice-btn" data-optimize="speed">⚡ Speed</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Stage 5: Deployment -->
+        <div id="stage5" class="screen">
+            <div class="screen-content">
+                <div class="stage-header">
+                    <h2>🚀 Deployment</h2>
+                    <p class="stage-description">Your model hits the real world...</p>
+                </div>
+                
+                <div class="deployment-events" id="deployment-events"></div>
+                
+                <div class="final-results" id="final-results" style="display: none;">
+                    <h2>🎯 Final Score</h2>
+                    <div class="score-circle">
+                        <span id="final-score">0</span>
+                    </div>
+                    <div class="result-title" id="result-title"></div>
+                    <div class="result-breakdown" id="result-breakdown"></div>
+                    <p style="text-align: center; margin: 20px 0; font-style: italic;">Thanks for playing! 🎮</p>
+                    <button id="play-again-btn" class="big-button">Play Again 🔄</button>
+                    <button class="back-menu-btn" onclick="goBackToMenu()">← Back to Menu</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Educational Tips Overlay -->
+        <div id="tip-overlay" class="overlay" style="display: none;">
+            <div class="tip-content">
+                <h3 id="tip-title"></h3>
+                <p id="tip-text"></p>
+                <button id="tip-continue" class="big-button">Got it! 👍</button>
+            </div>
+        </div>
+
+        <!-- Progress Indicator -->
+        <div class="progress-indicator">
+            <div class="progress-dots">
+                <div class="dot" data-stage="1"></div>
+                <div class="dot" data-stage="2"></div>
+                <div class="dot" data-stage="3"></div>
+                <div class="dot" data-stage="4"></div>
+                <div class="dot" data-stage="5"></div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

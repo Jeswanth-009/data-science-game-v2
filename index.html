@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DATA QUEST - Choose Your Level</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="main-container">
+        <div class="main-content">
+            <!-- Header -->
+            <header class="main-header">
+                <h1 class="main-title">
+                    <span class="title-icon">🎮</span>
+                    DATA QUEST
+                </h1>
+                <p class="main-tagline">Master the Art of Data Science — One Level at a Time</p>
+            </header>
+
+            <!-- Level Selection -->
+            <div class="levels-grid">
+                <!-- Level 1 -->
+                <div class="level-card level-1" data-level="1">
+                    <div class="level-number">LEVEL 1</div>
+                    <div class="level-icon">🤖</div>
+                    <h2 class="level-name">Model Mayhem</h2>
+                    <p class="level-description">Build an ML model from scratch. Make tough choices under pressure!</p>
+                    <div class="level-meta">
+                        <span class="meta-item">⏱️ 4-5 min</span>
+                        <span class="meta-item">🎯 Strategy</span>
+                    </div>
+                    <div class="level-score">
+                        <span class="score-label">Best Score:</span>
+                        <span class="score-value" id="score-1">--</span>
+                    </div>
+                    <button class="play-btn" onclick="playLevel(1)">
+                        <span>PLAY NOW</span>
+                        <span class="btn-arrow">→</span>
+                    </button>
+                </div>
+
+                <!-- Level 2 -->
+                <div class="level-card level-2" data-level="2">
+                    <div class="level-number">LEVEL 2</div>
+                    <div class="level-icon">🔍</div>
+                    <h2 class="level-name">Data Detective</h2>
+                    <p class="level-description">Spot patterns, trends, and outliers. Train your analytical eye!</p>
+                    <div class="level-meta">
+                        <span class="meta-item">⏱️ 3 min</span>
+                        <span class="meta-item">🧠 Analysis</span>
+                    </div>
+                    <div class="level-score">
+                        <span class="score-label">Best Score:</span>
+                        <span class="score-value" id="score-2">--</span>
+                    </div>
+                    <button class="play-btn" onclick="playLevel(2)">
+                        <span>PLAY NOW</span>
+                        <span class="btn-arrow">→</span>
+                    </button>
+                </div>
+
+                <!-- Level 3 -->
+                <div class="level-card level-3" data-level="3">
+                    <div class="level-number">LEVEL 3</div>
+                    <div class="level-icon">⚖️</div>
+                    <h2 class="level-name">Bias Breakdown</h2>
+                    <p class="level-description">Navigate ethical dilemmas. Balance accuracy, fairness, and trust.</p>
+                    <div class="level-meta">
+                        <span class="meta-item">⏱️ 3-4 min</span>
+                        <span class="meta-item">💭 Ethics</span>
+                    </div>
+                    <div class="level-score">
+                        <span class="score-label">Best Score:</span>
+                        <span class="score-value" id="score-3">--</span>
+                    </div>
+                    <button class="play-btn" onclick="playLevel(3)">
+                        <span>PLAY NOW</span>
+                        <span class="btn-arrow">→</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Overall Progress -->
+            <div class="progress-section">
+                <h3 class="progress-title">Your Journey</h3>
+                <div class="progress-stats">
+                    <div class="stat-item">
+                        <div class="stat-value" id="total-score">0</div>
+                        <div class="stat-label">Total Score</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="levels-completed">0</div>
+                        <div class="stat-label">Levels Completed</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-value" id="rank-title">Beginner</div>
+                        <div class="stat-label">Rank</div>
+                    </div>
+                </div>
+                <button class="reset-btn" onclick="resetProgress()">
+                    <span>🔄 Reset Progress</span>
+                </button>
+            </div>
+
+            <!-- Footer -->
+            <footer class="main-footer">
+                <p>Built with ❤️ by a data science enthusiast</p>
+                <p class="footer-note">Learn. Play. Master Data Science.</p>
+            </footer>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
