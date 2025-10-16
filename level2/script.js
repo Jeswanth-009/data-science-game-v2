@@ -62,30 +62,39 @@ document.addEventListener('DOMContentLoaded', () => {
 function setupCanvas() {
     const dpr = window.devicePixelRatio || 1;
     const container = canvas.parentElement;
+    
+    // Force a reflow to get accurate dimensions
+    container.style.display = 'flex';
     const rect = container.getBoundingClientRect();
     
-    // Calculate actual drawable area (subtract padding)
-    const padding = 32;
-    const canvasWidth = rect.width - padding;
-    const canvasHeight = rect.height - padding;
+    // Calculate actual drawable area (subtract container padding)
+    const containerPadding = 32; // 16px padding on each side
+    const canvasWidth = Math.floor(rect.width - containerPadding);
+    const canvasHeight = Math.floor(rect.height - containerPadding);
     
-    // Set canvas size with device pixel ratio for sharp rendering
+    // Set actual canvas resolution with device pixel ratio
     canvas.width = canvasWidth * dpr;
     canvas.height = canvasHeight * dpr;
     
-    // Set display size (CSS pixels)
+    // Set CSS display size
     canvas.style.width = canvasWidth + 'px';
     canvas.style.height = canvasHeight + 'px';
     
-    // Scale context to match device pixel ratio
+    // Get context and scale for retina displays
+    ctx = canvas.getContext('2d');
     ctx.scale(dpr, dpr);
+    
+    // Store logical dimensions for drawing
+    canvas.logicalWidth = canvasWidth;
+    canvas.logicalHeight = canvasHeight;
 }
 
 // Add resize handler for orientation changes
 window.addEventListener('resize', () => {
-    if (canvas && ctx && gameState.currentPattern) {
+    if (canvas && gameState.currentPattern) {
         setupCanvas();
-        drawPattern(gameState.currentPattern);
+        const dataPoints = generateData(gameState.currentPattern);
+        drawChart(dataPoints);
     }
 });
 
@@ -296,9 +305,12 @@ function generateDataPoints(pattern) {
 }
 
 function drawChart(dataPoints) {
-    const width = canvas.width / (window.devicePixelRatio || 1);
-    const height = canvas.height / (window.devicePixelRatio || 1);
-    const padding = 40;
+    // Use logical dimensions stored during setup
+    const width = canvas.logicalWidth || canvas.width / (window.devicePixelRatio || 1);
+    const height = canvas.logicalHeight || canvas.height / (window.devicePixelRatio || 1);
+    
+    // Responsive padding based on canvas size
+    const padding = Math.min(40, width * 0.1);
     const chartWidth = width - padding * 2;
     const chartHeight = height - padding * 2;
 
@@ -356,13 +368,16 @@ function drawChart(dataPoints) {
         ctx.fill();
     });
 
-    // Labels
+    // Labels - scale font size for mobile
+    const fontSize = Math.max(10, Math.min(12, width * 0.035));
     ctx.fillStyle = '#718096';
-    ctx.font = '12px Poppins';
+    ctx.font = `${fontSize}px Poppins, sans-serif`;
     ctx.textAlign = 'center';
-    ctx.fillText('Time →', width / 2, height - 10);
+    ctx.fillText('Time →', width / 2, height - 5);
+    
+    // Vertical label
     ctx.save();
-    ctx.translate(15, height / 2);
+    ctx.translate(10, height / 2);
     ctx.rotate(-Math.PI / 2);
     ctx.fillText('Value →', 0, 0);
     ctx.restore();

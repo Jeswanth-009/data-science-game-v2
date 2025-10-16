@@ -252,8 +252,8 @@ body {
 .chart-container {
     width: 100%;
     max-width: 400px;
-    height: 280px;
-    min-height: 280px;
+    height: 300px;
+    min-height: 300px;
     background: white;
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-md);
@@ -263,6 +263,7 @@ body {
     align-items: center;
     justify-content: center;
     position: relative;
+    box-sizing: border-box;
 }
 
 #chart-canvas {
@@ -271,6 +272,7 @@ body {
     max-width: 100%;
     max-height: 100%;
     display: block;
+    object-fit: contain;
 }
 
 .question-text {
@@ -461,13 +463,18 @@ body {
     }
 
     .chart-container {
-        height: 240px;
-        min-height: 240px;
-        padding: 12px;
+        height: 260px;
+        min-height: 260px;
+        padding: 14px;
+        max-width: 100%;
     }
 
     .question-text {
         font-size: 1rem;
+    }
+
+    .choices-container {
+        max-width: 100%;
     }
 
     .score-circle {
